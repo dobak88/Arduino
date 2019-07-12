@@ -10,7 +10,7 @@
 
 MPU6050 mpu;
 
-int piezoBuzzerPin = 7;     // Pin Piezo Buzzer is connected to
+int activeBuzzer = 7;     // Pin Active Buzzer is connected to
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
@@ -20,7 +20,7 @@ void setup()
 
     Serial.begin(115200);
 
-    pinMode(piezoBuzzerPin,OUTPUT);
+    pinMode(activeBuzzer,OUTPUT);
 
     pinMode(8,OUTPUT);
 
@@ -134,12 +134,12 @@ if(normGyro.XAxis > maxval || normGyro.XAxis < minval && normGyro.YAxis > maxval
 
 { 
     digitalWrite(8, HIGH);
-    analogWrite(piezoBuzzerPin, 200);
+    analogWrite(activeBuzzer, 200);
     //delay(1000);
     
     /*
     
-   digitalWrite(piezoBuzzerPin, HIGH);
+   digitalWrite(activeBuzzer, HIGH);
 
   digitalWrite(8,HIGH);
 
@@ -152,7 +152,7 @@ if(normGyro.XAxis > maxval || normGyro.XAxis < minval && normGyro.YAxis > maxval
 
   lcd.clear();}
 
- else{digitalWrite(piezoBuzzerPin, LOW);
+ else{digitalWrite(activeBuzzer, LOW);
 
  digitalWrite(8,LOW);
     lcd.print("       No ");
