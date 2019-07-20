@@ -1,9 +1,10 @@
 #include <Adafruit_NeoPixel.h>
-//#ifdef __AVR__
-//  #include <avr/power.h>
-//#endif
+#include <IRremote.h>
 
+
+#define RECV_PIN  11        //Infrared signal receiving pin
 #define PIN 5
+#define LED       13        //define LED pin
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = Arduino pin number (most are valid)
@@ -20,6 +21,9 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(58, PIN, NEO_GRB + NEO_KHZ800);
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
 
+ IRrecv irrecv(RECV_PIN);
+ decode_results results;
+
 void setup() {
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
 //  #if defined (__AVR_ATtiny85__)
@@ -30,6 +34,9 @@ void setup() {
   strip.begin();
   strip.setBrightness(75);
   strip.show(); // Initialize all pixels to 'off'
+  pinMode(PIN, OUTPUT); //initialize LED as an output
+  Serial.begin(9600);
+  irrecv.enableIRIn(); // Start the receiver
 }
 
 void loop() {
@@ -44,11 +51,27 @@ void loop() {
   //theaterChase(strip.Color(0, 0, 127), 50); // Blue
 
   //rainbow(20);
-  rainbowCycle(10);
+  if (irrecv.decode(&results))
+   {
+     int state;
+       if ( results.value == 1 )
+       {
+         state = HIGH;
+          }
+       else
+       {
+        state = LOW;
+       }
+    digitalWrite( PIN, state );
+    rainbowCycle(10);
+    Serial.println(results.value);
+    irrecv.resume();        // prepare to receive the next value
+   }
   //theaterChaseRainbow(100);
 }
 
 // Fill the dots one after the other with a color
+/*
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
@@ -68,7 +91,7 @@ void rainbow(uint8_t wait) {
     delay(wait);
   }
 }
-
+*/
 // Slightly different, this makes the rainbow equally distributed throughout
 void rainbowCycle(uint8_t wait) {
   uint16_t i, j;
@@ -83,6 +106,7 @@ void rainbowCycle(uint8_t wait) {
 }
 
 //Theatre-style crawling lights.
+/*
 void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
     for (int q=0; q < 3; q++) {
@@ -117,7 +141,7 @@ void theaterChaseRainbow(uint8_t wait) {
     }
   }
 }
-
+*/
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
 uint32_t Wheel(byte WheelPos) {
