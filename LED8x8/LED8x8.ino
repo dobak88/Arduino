@@ -19,7 +19,7 @@ byte invader1a[] =
 
 byte invader1b[] =
 {
-  B0001100 0, // Second frame of invader #1
+  B00011000, // Second frame of invader #1
   B00111100,
   B01111110,
   B11011011,
