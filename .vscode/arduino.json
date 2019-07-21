@@ -1,4 +1,4 @@
 {
-    "board": "arduino:megaavr:uno2018",
-    "configuration": "mode=on"
+    "board": "arduino:avr:uno",
+    "sketch": "../Arduino:Pi:Terminal/Elegoo 37 Sensor Kit Tutorial for UNO R3 and Mega 2560 V2/code/Lesson 8 IR Receiver and IR Emission/Lesson 8 IR Receiver and IR Emission/IR_Receiver/IR_Receiver.ino"
 }
