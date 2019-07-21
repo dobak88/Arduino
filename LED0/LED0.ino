@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-#include <IRremote.h>
+#include <IRremote.h> 
 
 
 #define RECV_PIN  11        //Infrared signal receiving pin
