@@ -14,6 +14,7 @@
 //   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 //   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(58, PIN, NEO_GRB + NEO_KHZ800);
 
 // IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
@@ -24,6 +25,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(58, PIN, NEO_GRB + NEO_KHZ800);
  IRrecv irrecv(RECV_PIN);
  decode_results results;
 
+
 void setup() {
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
 //  #if defined (__AVR_ATtiny85__)
@@ -31,6 +33,7 @@ void setup() {
 //  #endif
   // End of trinket special code
 
+  strip.helpme
   strip.begin();
   strip.setBrightness(75);
   strip.show(); // Initialize all pixels to 'off'
